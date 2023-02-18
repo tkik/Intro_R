@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>S4 classes</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">S4 classes</h1>
+
+
+
+<p>S4 classes are the perfect examples of the OO programming: - stricter structure - they have representations: a list of slots or arguments by name and class - the slots have to have the correct type - methods - they also inherit the methods from the classes of the arguments, but inheritence is between S4 classes as well. - has to be created with the new constructor - they have accessor methods as well.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">setClass</span>(<span class="st">&quot;Person&quot;</span>, <span class="kw">representation</span>(<span class="dt">name =</span> <span class="st">&quot;character&quot;</span>, <span class="dt">age =</span> <span class="st">&quot;numeric&quot;</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">setClass</span>(<span class="st">&quot;Employee&quot;</span>, <span class="kw">representation</span>(<span class="dt">boss =</span> <span class="st">&quot;Person&quot;</span>), <span class="dt">contains =</span> <span class="st">&quot;Person&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>person1 &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Person&quot;</span>, <span class="dt">name=</span><span class="st">&quot;Peter&quot;</span>, <span class="dt">age=</span><span class="dv">34</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>boss1 &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Employee&quot;</span>, <span class="dt">boss=</span>person1, <span class="dt">name=</span><span class="st">&quot;Lisa&quot;</span>, <span class="dt">age=</span><span class="dv">36</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>person1</span></code></pre></div>
+<pre><code>## An object of class &quot;Person&quot;
+## Slot &quot;name&quot;:
+## [1] &quot;Peter&quot;
+## 
+## Slot &quot;age&quot;:
+## [1] 34</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>boss1</span></code></pre></div>
+<pre><code>## An object of class &quot;Employee&quot;
+## Slot &quot;boss&quot;:
+## An object of class &quot;Person&quot;
+## Slot &quot;name&quot;:
+## [1] &quot;Peter&quot;
+## 
+## Slot &quot;age&quot;:
+## [1] 34
+## 
+## 
+## Slot &quot;name&quot;:
+## [1] &quot;Lisa&quot;
+## 
+## Slot &quot;age&quot;:
+## [1] 36</code></pre>
+<p>Example class: SummarizedExperiment</p>
+<p>Representation:</p>
+<p><code>RangedSummarizedExperiment</code> is an extension of <code>SummarizedExperiment</code>. It uses <code>GRanges</code> to define the genomic regions.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">library</span>(SummarizedExperiment)</span></code></pre></div>
+<pre><code>## Loading required package: MatrixGenerics</code></pre>
+<pre><code>## Loading required package: matrixStats</code></pre>
+<pre><code>## 
+## Attaching package: &#39;matrixStats&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     count</code></pre>
+<pre><code>## The following objects are masked from &#39;package:Biobase&#39;:
+## 
+##     anyMissing, rowMedians</code></pre>
+<pre><code>## 
+## Attaching package: &#39;MatrixGenerics&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:matrixStats&#39;:
+## 
+##     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+##     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+##     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+##     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+##     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+##     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+##     colWeightedMeans, colWeightedMedians, colWeightedSds,
+##     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+##     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+##     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+##     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+##     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+##     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+##     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+##     rowWeightedSds, rowWeightedVars</code></pre>
+<pre><code>## The following object is masked from &#39;package:Biobase&#39;:
+## 
+##     rowMedians</code></pre>
+<pre><code>## Loading required package: GenomicRanges</code></pre>
+<pre><code>## Loading required package: GenomeInfoDb</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">data</span>(<span class="st">&quot;airway_small&quot;</span>,  <span class="dt">package=</span><span class="st">&quot;BasicR&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a>se &lt;-<span class="st"> </span>airway_small</span></code></pre></div>
+<div id="accessors" class="section level2">
+<h2>Accessors</h2>
+<p>To know all this, look for the help and the vignette.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">colData</span>(se)</span></code></pre></div>
+<pre><code>## DataFrame with 8 rows and 9 columns
+##            SampleName     cell      dex    albut        Run avgLength
+##              &lt;factor&gt; &lt;factor&gt; &lt;factor&gt; &lt;factor&gt;   &lt;factor&gt; &lt;integer&gt;
+## SRR1039508 GSM1275862  N61311     untrt    untrt SRR1039508       126
+## SRR1039509 GSM1275863  N61311     trt      untrt SRR1039509       126
+## SRR1039512 GSM1275866  N052611    untrt    untrt SRR1039512       126
+## SRR1039513 GSM1275867  N052611    trt      untrt SRR1039513        87
+## SRR1039516 GSM1275870  N080611    untrt    untrt SRR1039516       120
+## SRR1039517 GSM1275871  N080611    trt      untrt SRR1039517       126
+## SRR1039520 GSM1275874  N061011    untrt    untrt SRR1039520       101
+## SRR1039521 GSM1275875  N061011    trt      untrt SRR1039521        98
+##            Experiment    Sample    BioSample
+##              &lt;factor&gt;  &lt;factor&gt;     &lt;factor&gt;
+## SRR1039508  SRX384345 SRS508568 SAMN02422669
+## SRR1039509  SRX384346 SRS508567 SAMN02422675
+## SRR1039512  SRX384349 SRS508571 SAMN02422678
+## SRR1039513  SRX384350 SRS508572 SAMN02422670
+## SRR1039516  SRX384353 SRS508575 SAMN02422682
+## SRR1039517  SRX384354 SRS508576 SAMN02422673
+## SRR1039520  SRX384357 SRS508579 SAMN02422683
+## SRR1039521  SRX384358 SRS508580 SAMN02422677</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">rowData</span>(se)</span></code></pre></div>
+<pre><code>## DataFrame with 4001 rows and 0 columns</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">#assay(se)</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">rowRanges</span>(se)</span></code></pre></div>
+<pre><code>## GRangesList object of length 4001:
+## $ENSG00000000003
+## GRanges object with 17 ranges and 2 metadata columns:
+##        seqnames            ranges strand |   exon_id       exon_name
+##           &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;
+##    [1]        X 99883667-99884983      - |    667145 ENSE00001459322
+##    [2]        X 99885756-99885863      - |    667146 ENSE00000868868
+##    [3]        X 99887482-99887565      - |    667147 ENSE00000401072
+##    [4]        X 99887538-99887565      - |    667148 ENSE00001849132
+##    [5]        X 99888402-99888536      - |    667149 ENSE00003554016
+##    ...      ...               ...    ... .       ...             ...
+##   [13]        X 99890555-99890743      - |    667156 ENSE00003512331
+##   [14]        X 99891188-99891686      - |    667158 ENSE00001886883
+##   [15]        X 99891605-99891803      - |    667159 ENSE00001855382
+##   [16]        X 99891790-99892101      - |    667160 ENSE00001863395
+##   [17]        X 99894942-99894988      - |    667161 ENSE00001828996
+##   -------
+##   seqinfo: 722 sequences (1 circular) from an unspecified genome
+## 
+## ...
+## &lt;4000 more elements&gt;</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">#assays(se)[[1]]</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="kw">head</span>(<span class="kw">assays</span>(se)<span class="op">$</span>counts)</span></code></pre></div>
+<pre><code>##                 SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516
+## ENSG00000000003        679        448        873        408       1138
+## ENSG00000000005          0          0          0          0          0
+## ENSG00000000419        467        515        621        365        587
+## ENSG00000000457        260        211        263        164        245
+## ENSG00000000460         60         55         40         35         78
+## ENSG00000000938          0          0          2          0          1
+##                 SRR1039517 SRR1039520 SRR1039521
+## ENSG00000000003       1047        770        572
+## ENSG00000000005          0          0          0
+## ENSG00000000419        799        417        508
+## ENSG00000000457        331        233        229
+## ENSG00000000460         63         76         60
+## ENSG00000000938          0          0          0</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">head</span>(<span class="kw">metadata</span>(airway_small))</span></code></pre></div>
+<pre><code>## [[1]]
+## Experiment data
+##   Experimenter name: Himes BE 
+##   Laboratory: NA 
+##   Contact information:  
+##   Title: RNA-Seq transcriptome profiling identifies CRISPLD2 as a glucocorticoid responsive gene that modulates cytokine function in airway smooth muscle cells. 
+##   URL: http://www.ncbi.nlm.nih.gov/pubmed/24926665 
+##   PMIDs: 24926665 
+## 
+##   Abstract: A 226 word abstract is available. Use &#39;abstract&#39; method.</code></pre>
+<p>You can access each data “natively”, and even change it, but you shouldn’t do that. Why? It is easy to screw it up…</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>se<span class="op">@</span>rowRanges</span></code></pre></div>
+<pre><code>## GRangesList object of length 4001:
+## $ENSG00000000003
+## GRanges object with 17 ranges and 2 metadata columns:
+##        seqnames            ranges strand |   exon_id       exon_name
+##           &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;
+##    [1]        X 99883667-99884983      - |    667145 ENSE00001459322
+##    [2]        X 99885756-99885863      - |    667146 ENSE00000868868
+##    [3]        X 99887482-99887565      - |    667147 ENSE00000401072
+##    [4]        X 99887538-99887565      - |    667148 ENSE00001849132
+##    [5]        X 99888402-99888536      - |    667149 ENSE00003554016
+##    ...      ...               ...    ... .       ...             ...
+##   [13]        X 99890555-99890743      - |    667156 ENSE00003512331
+##   [14]        X 99891188-99891686      - |    667158 ENSE00001886883
+##   [15]        X 99891605-99891803      - |    667159 ENSE00001855382
+##   [16]        X 99891790-99892101      - |    667160 ENSE00001863395
+##   [17]        X 99894942-99894988      - |    667161 ENSE00001828996
+##   -------
+##   seqinfo: 722 sequences (1 circular) from an unspecified genome
+## 
+## ...
+## &lt;4000 more elements&gt;</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>se<span class="op">@</span>metadata</span></code></pre></div>
+<pre><code>## [[1]]
+## Experiment data
+##   Experimenter name: Himes BE 
+##   Laboratory: NA 
+##   Contact information:  
+##   Title: RNA-Seq transcriptome profiling identifies CRISPLD2 as a glucocorticoid responsive gene that modulates cytokine function in airway smooth muscle cells. 
+##   URL: http://www.ncbi.nlm.nih.gov/pubmed/24926665 
+##   PMIDs: 24926665 
+## 
+##   Abstract: A 226 word abstract is available. Use &#39;abstract&#39; method.</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co">###don&#39;t do this:</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>se<span class="op">@</span>rowRanges &lt;-<span class="st"> </span>se<span class="op">@</span>rowRanges[<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>]</span>
+<span id="cb32-3"><a href="#cb32-3"></a>se</span></code></pre></div>
+<pre><code>## class: RangedSummarizedExperiment 
+## dim: 4001 8 
+## metadata(1): &#39;&#39;
+## assays(1): counts
+## rownames(3000): ENSG00000000003 ENSG00000000005 ... ENSG00000162951
+##   ENSG00000162959
+## rowData names(0):
+## colnames(8): SRR1039508 SRR1039509 ... SRR1039520 SRR1039521
+## colData names(9): SampleName cell ... Sample BioSample</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>se<span class="op">@</span>rowRanges</span></code></pre></div>
+<pre><code>## GRangesList object of length 3000:
+## $ENSG00000000003
+## GRanges object with 17 ranges and 2 metadata columns:
+##        seqnames            ranges strand |   exon_id       exon_name
+##           &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;
+##    [1]        X 99883667-99884983      - |    667145 ENSE00001459322
+##    [2]        X 99885756-99885863      - |    667146 ENSE00000868868
+##    [3]        X 99887482-99887565      - |    667147 ENSE00000401072
+##    [4]        X 99887538-99887565      - |    667148 ENSE00001849132
+##    [5]        X 99888402-99888536      - |    667149 ENSE00003554016
+##    ...      ...               ...    ... .       ...             ...
+##   [13]        X 99890555-99890743      - |    667156 ENSE00003512331
+##   [14]        X 99891188-99891686      - |    667158 ENSE00001886883
+##   [15]        X 99891605-99891803      - |    667159 ENSE00001855382
+##   [16]        X 99891790-99892101      - |    667160 ENSE00001863395
+##   [17]        X 99894942-99894988      - |    667161 ENSE00001828996
+##   -------
+##   seqinfo: 722 sequences (1 circular) from an unspecified genome
+## 
+## ...
+## &lt;2999 more elements&gt;</code></pre>
+</div>
+<div id="methods" class="section level2">
+<h2>Methods</h2>
+<div id="subsetting" class="section level3">
+<h3>subsetting</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># subsetting is very easy, just like with a data.frame</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a></span>
+<span id="cb36-3"><a href="#cb36-3"></a>se &lt;-<span class="st"> </span>se[<span class="dv">1</span><span class="op">:</span><span class="dv">2000</span>,]</span>
+<span id="cb36-4"><a href="#cb36-4"></a></span>
+<span id="cb36-5"><a href="#cb36-5"></a>se &lt;-<span class="st"> </span>se[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span>
+<span id="cb36-6"><a href="#cb36-6"></a></span>
+<span id="cb36-7"><a href="#cb36-7"></a>se</span></code></pre></div>
+<pre><code>## class: RangedSummarizedExperiment 
+## dim: 2000 3 
+## metadata(1): &#39;&#39;
+## assays(1): counts
+## rownames(2000): ENSG00000000003 ENSG00000000005 ... ENSG00000092758
+##   ENSG00000092820
+## rowData names(0):
+## colnames(3): SRR1039508 SRR1039509 SRR1039512
+## colData names(9): SampleName cell ... Sample BioSample</code></pre>
+</div>
+<div id="combining" class="section level3">
+<h3>Combining</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>rowbinded &lt;-<span class="st"> </span><span class="kw">rbind</span>(se, se)</span>
+<span id="cb38-2"><a href="#cb38-2"></a>rowbinded</span></code></pre></div>
+<pre><code>## class: RangedSummarizedExperiment 
+## dim: 4000 3 
+## metadata(2): &#39;&#39; &#39;&#39;
+## assays(1): counts
+## rownames(4000): ENSG00000000003 ENSG00000000005 ... ENSG00000092758
+##   ENSG00000092820
+## rowData names(0):
+## colnames(3): SRR1039508 SRR1039509 SRR1039512
+## colData names(9): SampleName cell ... Sample BioSample</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>colbinded &lt;-<span class="st"> </span><span class="kw">cbind</span>(se, se)</span>
+<span id="cb40-2"><a href="#cb40-2"></a>colbinded</span></code></pre></div>
+<pre><code>## class: RangedSummarizedExperiment 
+## dim: 2000 6 
+## metadata(2): &#39;&#39; &#39;&#39;
+## assays(1): counts
+## rownames(2000): ENSG00000000003 ENSG00000000005 ... ENSG00000092758
+##   ENSG00000092820
+## rowData names(0):
+## colnames(6): SRR1039508 SRR1039509 ... SRR1039509 SRR1039512
+## colData names(9): SampleName cell ... Sample BioSample</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>roi &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="dt">seqnames=</span><span class="st">&quot;X&quot;</span>, <span class="dt">ranges=</span><span class="dv">99800000</span><span class="op">:</span><span class="dv">99850000</span>)</span>
+<span id="cb42-2"><a href="#cb42-2"></a>se_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">subsetByOverlaps</span>(se, roi)</span></code></pre></div>
+</div>
+</div>
+<div id="granges-and-grangeslist" class="section level2">
+<h2>Granges and GRangesList</h2>
+<p><code>GRanges</code> objects store information about Genomic ranges with chromosome, position and additional information. Offers a wide range of functionality. <code>GRangesList</code> is a “grouped” version of <code>GRnages</code>, it is similar to a normal list, but with additional functionality. Both of them are able to handle strand information as well.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">library</span>(GenomicRanges)</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a>gr1 &lt;-<span class="st"> </span><span class="kw">GRanges</span>(</span>
+<span id="cb43-4"><a href="#cb43-4"></a>    <span class="dt">seqnames =</span> <span class="st">&quot;chr2&quot;</span>,</span>
+<span id="cb43-5"><a href="#cb43-5"></a>    <span class="dt">ranges =</span> <span class="kw">IRanges</span>(<span class="dv">103</span>, <span class="dv">106</span>),</span>
+<span id="cb43-6"><a href="#cb43-6"></a>    <span class="dt">strand =</span> <span class="st">&quot;+&quot;</span>,</span>
+<span id="cb43-7"><a href="#cb43-7"></a>    <span class="dt">score =</span> 5L, <span class="dt">GC =</span> <span class="fl">0.45</span>)</span>
+<span id="cb43-8"><a href="#cb43-8"></a>gr2 &lt;-<span class="st"> </span><span class="kw">GRanges</span>(</span>
+<span id="cb43-9"><a href="#cb43-9"></a>    <span class="dt">seqnames =</span> <span class="kw">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr3&quot;</span>),</span>
+<span id="cb43-10"><a href="#cb43-10"></a>    <span class="dt">ranges =</span> <span class="kw">IRanges</span>(<span class="kw">c</span>(<span class="dv">107</span>, <span class="dv">113</span>), <span class="dt">width =</span> <span class="dv">3</span>),</span>
+<span id="cb43-11"><a href="#cb43-11"></a>    <span class="dt">strand =</span> <span class="kw">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>),</span>
+<span id="cb43-12"><a href="#cb43-12"></a>    <span class="dt">score =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">GC =</span> <span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.5</span>))</span>
+<span id="cb43-13"><a href="#cb43-13"></a>gr3 &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="st">&quot;chr2:102-107&quot;</span>)</span>
+<span id="cb43-14"><a href="#cb43-14"></a></span>
+<span id="cb43-15"><a href="#cb43-15"></a>gr4 &lt;-<span class="st"> </span><span class="kw">makeGRangesFromDataFrame</span>(<span class="kw">data.frame</span>(<span class="dt">chr=</span><span class="kw">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr2&quot;</span>), </span>
+<span id="cb43-16"><a href="#cb43-16"></a>                                           <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">104</span>, <span class="dv">104</span>), <span class="dt">end=</span><span class="kw">c</span>(<span class="dv">108</span>, <span class="dv">105</span>),</span>
+<span id="cb43-17"><a href="#cb43-17"></a>                                           <span class="dt">name=</span><span class="kw">c</span>(<span class="st">&quot;gene1&quot;</span>, <span class="st">&quot;gene2&quot;</span>)), <span class="dt">keep.extra.columns =</span> T, <span class="dt">ignore.strand =</span> T)</span>
+<span id="cb43-18"><a href="#cb43-18"></a>grl &lt;-<span class="st"> </span><span class="kw">GRangesList</span>(<span class="st">&quot;txA&quot;</span> =<span class="st"> </span>gr1, <span class="st">&quot;txB&quot;</span> =<span class="st"> </span>gr2)</span>
+<span id="cb43-19"><a href="#cb43-19"></a>grl</span></code></pre></div>
+<pre><code>## GRangesList object of length 2:
+## $txA
+## GRanges object with 1 range and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr2   103-106      + |         5      0.45
+##   -------
+##   seqinfo: 3 sequences from an unspecified genome; no seqlengths
+## 
+## $txB
+## GRanges object with 2 ranges and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr1   107-109      + |         3       0.3
+##   [2]     chr3   113-115      - |         4       0.5
+##   -------
+##   seqinfo: 3 sequences from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co">#seqinfo(gr1) &lt;- Seqinfo(genome=&quot;hg38&quot;)</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="co">#can have names for each row</span></span></code></pre></div>
+<div id="accessors-1" class="section level3">
+<h3>Accessors</h3>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">seqnames</span>(gr1)</span></code></pre></div>
+<pre><code>## factor-Rle of length 1 with 1 run
+##   Lengths:    1
+##   Values : chr2
+## Levels(1): chr2</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">seqlevels</span>(gr1)</span></code></pre></div>
+<pre><code>## [1] &quot;chr2&quot;</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">ranges</span>(gr1)</span></code></pre></div>
+<pre><code>## IRanges object with 1 range and 0 metadata columns:
+##           start       end     width
+##       &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;
+##   [1]       103       106         4</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">start</span>(gr1)</span></code></pre></div>
+<pre><code>## [1] 103</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">end</span>(gr1)</span></code></pre></div>
+<pre><code>## [1] 106</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">strand</span>(gr1)</span></code></pre></div>
+<pre><code>## factor-Rle of length 1 with 1 run
+##   Lengths: 1
+##   Values : +
+## Levels(3): + - *</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">width</span>(gr1)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">length</span>(gr1)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">mcols</span>(gr4)</span></code></pre></div>
+<pre><code>## DataFrame with 2 rows and 1 column
+##          name
+##   &lt;character&gt;
+## 1       gene1
+## 2       gene2</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">mcols</span>(gr4)<span class="op">$</span>name</span></code></pre></div>
+<pre><code>## [1] &quot;gene1&quot; &quot;gene2&quot;</code></pre>
+</div>
+<div id="subsetting-1" class="section level3">
+<h3>Subsetting</h3>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">#data.frame-like</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a></span>
+<span id="cb66-3"><a href="#cb66-3"></a>gr1[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>## GRanges object with 1 range and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr2   103-106      + |         5      0.45
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>gr4[<span class="dv">1</span>, <span class="st">&quot;name&quot;</span>]</span></code></pre></div>
+<pre><code>## GRanges object with 1 range and 1 metadata column:
+##       seqnames    ranges strand |        name
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;
+##   [1]     chr1   104-108      * |       gene1
+##   -------
+##   seqinfo: 2 sequences from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># subset function</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a><span class="kw">subset</span>(gr1, strand <span class="op">==</span><span class="st"> &quot;+&quot;</span>)</span></code></pre></div>
+<pre><code>## GRanges object with 1 range and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr2   103-106      + |         5      0.45
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+</div>
+<div id="splitting-and-combining" class="section level3">
+<h3>Splitting and combining</h3>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>sp &lt;-<span class="st"> </span><span class="kw">split</span>(gr2, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span>
+<span id="cb72-2"><a href="#cb72-2"></a><span class="kw">split</span>(gr4, <span class="op">~</span><span class="st"> </span>name)</span></code></pre></div>
+<pre><code>## GRangesList object of length 2:
+## $gene1
+## GRanges object with 1 range and 1 metadata column:
+##       seqnames    ranges strand |        name
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;
+##   [1]     chr1   104-108      * |       gene1
+##   -------
+##   seqinfo: 2 sequences from an unspecified genome; no seqlengths
+## 
+## $gene2
+## GRanges object with 1 range and 1 metadata column:
+##       seqnames    ranges strand |        name
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;
+##   [1]     chr2   104-105      * |       gene2
+##   -------
+##   seqinfo: 2 sequences from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">c</span>(sp[[<span class="dv">1</span>]], sp[[<span class="dv">2</span>]])</span></code></pre></div>
+<pre><code>## GRanges object with 2 ranges and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr1   107-109      + |         3       0.3
+##   [2]     chr3   113-115      - |         4       0.5
+##   -------
+##   seqinfo: 2 sequences from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="kw">stack</span>(sp, <span class="dt">index.var=</span><span class="st">&quot;name&quot;</span>)</span></code></pre></div>
+<pre><code>## GRanges object with 2 ranges and 3 metadata columns:
+##       seqnames    ranges strand |  name     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;Rle&gt; &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr1   107-109      + |     1         3       0.3
+##   [2]     chr3   113-115      - |     2         4       0.5
+##   -------
+##   seqinfo: 2 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+<div id="aggregating" class="section level3">
+<h3>Aggregating</h3>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="kw">aggregate</span>(gr2, score <span class="op">~</span><span class="st"> </span>strand, mean)</span></code></pre></div>
+<pre><code>## DataFrame with 2 rows and 2 columns
+##     strand     score
+##   &lt;factor&gt; &lt;numeric&gt;
+## 1        +         3
+## 2        -         4</code></pre>
+</div>
+<div id="interval-operations" class="section level3">
+<h3>Interval operations</h3>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="kw">flank</span>(gr1, <span class="dv">10</span>, <span class="dt">both=</span>T)</span></code></pre></div>
+<pre><code>## GRanges object with 1 range and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr2    93-112      + |         5      0.45
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="kw">shift</span>(gr2, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## GRanges object with 2 ranges and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr1   112-114      + |         3       0.3
+##   [2]     chr3   118-120      - |         4       0.5
+##   -------
+##   seqinfo: 2 sequences from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="kw">resize</span>(gr1, <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## GRanges object with 1 range and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr2   103-122      + |         5      0.45
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="kw">c</span>(gr1, gr3)</span></code></pre></div>
+<pre><code>## GRanges object with 2 ranges and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr2   103-106      + |         5      0.45
+##   [2]     chr2   102-107      * |      &lt;NA&gt;        NA
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a> <span class="kw">reduce</span>(<span class="kw">c</span>(gr1, gr3)) <span class="co"># combines the overlapping ranges</span></span></code></pre></div>
+<pre><code>## GRanges object with 2 ranges and 0 metadata columns:
+##       seqnames    ranges strand
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]     chr2   103-106      +
+##   [2]     chr2   102-107      *
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a> <span class="kw">reduce</span>(<span class="kw">c</span>(gr1, gr3), <span class="dt">ignore.strand=</span>T)</span></code></pre></div>
+<pre><code>## GRanges object with 1 range and 0 metadata columns:
+##       seqnames    ranges strand
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]     chr2   102-107      *
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+</div>
+<div id="comapring-2-granges" class="section level3">
+<h3>Comapring 2 GRanges</h3>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="kw">union</span>(gr2, gr4)</span></code></pre></div>
+<pre><code>## Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
+##   - in &#39;x&#39;: chr3
+##   - in &#39;y&#39;: chr2
+##   Make sure to always combine/compare objects based on the same reference
+##   genome (use suppressWarnings() to suppress this warning).</code></pre>
+<pre><code>## GRanges object with 4 ranges and 0 metadata columns:
+##       seqnames    ranges strand
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]     chr1   107-109      +
+##   [2]     chr1   104-108      *
+##   [3]     chr3   113-115      -
+##   [4]     chr2   104-105      *
+##   -------
+##   seqinfo: 3 sequences from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a><span class="co">#intersect(gr2, gr4)</span></span>
+<span id="cb95-2"><a href="#cb95-2"></a><span class="kw">setdiff</span>(gr2, gr4)</span></code></pre></div>
+<pre><code>## Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
+##   - in &#39;x&#39;: chr3
+##   - in &#39;y&#39;: chr2
+##   Make sure to always combine/compare objects based on the same reference
+##   genome (use suppressWarnings() to suppress this warning).</code></pre>
+<pre><code>## GRanges object with 2 ranges and 0 metadata columns:
+##       seqnames    ranges strand
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]     chr1   107-109      +
+##   [2]     chr3   113-115      -
+##   -------
+##   seqinfo: 3 sequences from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a>hits &lt;-<span class="st"> </span><span class="kw">findOverlaps</span>(gr2, gr4, <span class="dt">ignore.strand=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
+##   - in &#39;x&#39;: chr3
+##   - in &#39;y&#39;: chr2
+##   Make sure to always combine/compare objects based on the same reference
+##   genome (use suppressWarnings() to suppress this warning).</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="kw">countOverlaps</span>(gr2, gr4, <span class="dt">ignore.strand=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
+##   - in &#39;x&#39;: chr3
+##   - in &#39;y&#39;: chr2
+##   Make sure to always combine/compare objects based on the same reference
+##   genome (use suppressWarnings() to suppress this warning).</code></pre>
+<pre><code>## [1] 1 0</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a><span class="kw">subsetByOverlaps</span>(gr2, gr4)</span></code></pre></div>
+<pre><code>## Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
+##   - in &#39;x&#39;: chr3
+##   - in &#39;y&#39;: chr2
+##   Make sure to always combine/compare objects based on the same reference
+##   genome (use suppressWarnings() to suppress this warning).</code></pre>
+<pre><code>## GRanges object with 1 range and 2 metadata columns:
+##       seqnames    ranges strand |     score        GC
+##          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt; &lt;numeric&gt;
+##   [1]     chr1   107-109      + |         3       0.3
+##   -------
+##   seqinfo: 2 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<div id="deseq2" class="section level2">
+<h2>DeSeq2</h2>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="kw">library</span>(<span class="st">&quot;pasilla&quot;</span>)</span>
+<span id="cb106-2"><a href="#cb106-2"></a>pasCts &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,</span>
+<span id="cb106-3"><a href="#cb106-3"></a>                      <span class="st">&quot;pasilla_gene_counts.tsv&quot;</span>,</span>
+<span id="cb106-4"><a href="#cb106-4"></a>                      <span class="dt">package=</span><span class="st">&quot;pasilla&quot;</span>, <span class="dt">mustWork=</span><span class="ot">TRUE</span>)</span>
+<span id="cb106-5"><a href="#cb106-5"></a>pasAnno &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,</span>
+<span id="cb106-6"><a href="#cb106-6"></a>                       <span class="st">&quot;pasilla_sample_annotation.csv&quot;</span>,</span>
+<span id="cb106-7"><a href="#cb106-7"></a>                       <span class="dt">package=</span><span class="st">&quot;pasilla&quot;</span>, <span class="dt">mustWork=</span><span class="ot">TRUE</span>)</span>
+<span id="cb106-8"><a href="#cb106-8"></a>cts &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">read.csv</span>(pasCts,<span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,<span class="dt">row.names=</span><span class="st">&quot;gene_id&quot;</span>))</span>
+<span id="cb106-9"><a href="#cb106-9"></a>coldata &lt;-<span class="st"> </span><span class="kw">read.csv</span>(pasAnno, <span class="dt">row.names=</span><span class="dv">1</span>)</span>
+<span id="cb106-10"><a href="#cb106-10"></a>coldata &lt;-<span class="st"> </span>coldata[,<span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>,<span class="st">&quot;type&quot;</span>)]</span>
+<span id="cb106-11"><a href="#cb106-11"></a></span>
+<span id="cb106-12"><a href="#cb106-12"></a><span class="kw">rownames</span>(coldata) &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;fb&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="kw">rownames</span>(coldata))</span>
+<span id="cb106-13"><a href="#cb106-13"></a>cts &lt;-<span class="st"> </span>cts[, <span class="kw">rownames</span>(coldata)]</span>
+<span id="cb106-14"><a href="#cb106-14"></a></span>
+<span id="cb106-15"><a href="#cb106-15"></a><span class="kw">library</span>(<span class="st">&quot;DESeq2&quot;</span>)</span>
+<span id="cb106-16"><a href="#cb106-16"></a>dds &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(<span class="dt">countData =</span> cts,</span>
+<span id="cb106-17"><a href="#cb106-17"></a>                              <span class="dt">colData =</span> coldata,</span>
+<span id="cb106-18"><a href="#cb106-18"></a>                              <span class="dt">design =</span> <span class="op">~</span><span class="st"> </span>condition)</span></code></pre></div>
+<pre><code>## Warning in DESeqDataSet(se, design = design, ignoreRank): some variables in
+## design formula are characters, converting to factors</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a>dds</span></code></pre></div>
+<pre><code>## class: DESeqDataSet 
+## dim: 14599 7 
+## metadata(1): version
+## assays(1): counts
+## rownames(14599): FBgn0000003 FBgn0000008 ... FBgn0261574 FBgn0261575
+## rowData names(0):
+## colnames(7): treated1 treated2 ... untreated3 untreated4
+## colData names(2): condition type</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a>dds &lt;-<span class="st"> </span>dds[<span class="dv">1</span><span class="op">:</span><span class="dv">200</span>,]</span>
+<span id="cb110-2"><a href="#cb110-2"></a>dds &lt;-<span class="st"> </span><span class="kw">DESeq</span>(dds)</span></code></pre></div>
+<pre><code>## estimating size factors</code></pre>
+<pre><code>## estimating dispersions</code></pre>
+<pre><code>## gene-wise dispersion estimates</code></pre>
+<pre><code>## mean-dispersion relationship</code></pre>
+<pre><code>## final dispersion estimates</code></pre>
+<pre><code>## fitting model and testing</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a>res &lt;-<span class="st"> </span><span class="kw">results</span>(dds)</span>
+<span id="cb117-2"><a href="#cb117-2"></a>res</span></code></pre></div>
+<pre><code>## log2 fold change (MLE): condition untreated vs treated 
+## Wald test p-value: condition untreated vs treated 
+## DataFrame with 200 rows and 6 columns
+##                baseMean log2FoldChange     lfcSE       stat      pvalue
+##               &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;
+## FBgn0000003    0.172207     -0.9986796  3.806863 -0.2623366   0.7930619
+## FBgn0000008   95.873798      0.0140036  0.219868  0.0636906   0.9492166
+## FBgn0000014    1.090634      0.5233543  2.215680  0.2362048   0.8132737
+## FBgn0000015    0.853818      1.8909340  2.149959  0.8795209   0.3791189
+## FBgn0000017 4392.045082      0.2549107  0.116978  2.1791389   0.0293213
+## ...                 ...            ...       ...        ...         ...
+## FBgn0000567   263.99287       1.239187  0.166174   7.457181 8.83932e-14
+## FBgn0000568  3655.58621       0.220186  0.210651   1.045263 2.95901e-01
+## FBgn0000575  1435.99029      -0.300818  0.175862  -1.710531 8.71677e-02
+## FBgn0000576     0.00000             NA        NA         NA          NA
+## FBgn0000577     0.35367       1.822069  3.491008   0.521932 6.01718e-01
+##                    padj
+##               &lt;numeric&gt;
+## FBgn0000003    0.994466
+## FBgn0000008    0.996580
+## FBgn0000014    0.994466
+## FBgn0000015    0.817888
+## FBgn0000017    0.189072
+## ...                 ...
+## FBgn0000567 8.26476e-12
+## FBgn0000568 7.88180e-01
+## FBgn0000575 3.97570e-01
+## FBgn0000576          NA
+## FBgn0000577 9.94466e-01</code></pre>
+<p>```</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Control structures</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Control structures</h1>
+
+
+
+<div id="control-structures-in-r" class="section level1 tabset tabset-pills">
+<h1>Control structures in R</h1>
+<ol style="list-style-type: decimal">
+<li><p>If-else statement</p></li>
+<li><p>for cycles</p></li>
+<li><p>while</p></li>
+<li><p>Repeat</p></li>
+</ol>
+<div id="if-else-statement" class="section level2">
+<h2>If-else statement</h2>
+<p>Conditional execution of a code. General form:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># if (&lt;condition&gt;){</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># what to do if true</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#} else if (&lt;other condition&gt;){</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># what to do if true</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#} else {</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># what to do if none of them are true</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#}</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#</span></span></code></pre></div>
+<ul>
+<li>Condition should be logical, or (0,1).</li>
+<li>Else and if else are optional, multiple else if are possible.</li>
+<li>The statement will be executed and the first! expression that is true will be evaluated.</li>
+<li>If multiple statements can be true and we want to evaluate all -&gt; nested if statements.</li>
+<li>Short version is <code>ifelse()</code>.</li>
+</ul>
+</div>
+<div id="for-cycle" class="section level2">
+<h2>For cycle</h2>
+<p>Iteration, repeat behaviour. If we want to repeat the same command on a set of values or variables.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># for (i in 1:10) {</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># print(i)</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># }</span></span></code></pre></div>
+<ul>
+<li>The value of the iterating variable (here <code>i</code>) is automatically changing in every cycle.</li>
+<li>The iterating variable can be also logical, character, list element.</li>
+<li>The return value of the iterating variable is the cycle that was run last.</li>
+</ul>
+</div>
+<div id="while" class="section level2">
+<h2>While</h2>
+<p>While statements will repeat a task until a condition is met. Can easily be infinite, so be careful.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># count &lt;- 0</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># while(count &lt; 10) {</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#         print(count)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#         count &lt;- count + 1</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># }</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">##DO NOT RUN##</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co"># count &lt;- 0</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co"># while(count &lt; 10) {</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#         print(count)</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#         count &lt;- count - 1</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># }</span></span></code></pre></div>
+</div>
+<div id="repeat" class="section level2">
+<h2>Repeat</h2>
+<p><code>Repeat</code> will repeat the expression in an infinite loop. To stop, the <code>break</code> command has to be used. Can be dangerous.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#count &lt;- 1</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># repeat {</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#         count &lt;- count + 1</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># if (count &gt;10)</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#break</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># }</span></span></code></pre></div>
+</div>
+<div id="break-and-next" class="section level2">
+<h2>break and next</h2>
+<p>As seen above, <code>break</code> breaks the whole loop and exits.</p>
+<p><code>next</code> only breaks the current iteration and the loop continues.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># for (i in 1:10) {</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># if (i==5)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># next</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># print(i)</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># }</span></span></code></pre></div>
+</div>
+</div>
+<div id="troubleshooting" class="section level1">
+<h1>Troubleshooting</h1>
+<p><a href="https://docs.google.com/presentation/d/1nSdvByo3jtu47sXF6lybmoGbPxh5xLp8o9aeRC-Bh20/edit"><strong>Bingo!</strong></a></p>
+<p>Useful functions: print(), browser()</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a> <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>   a &lt;-<span class="st"> </span>i<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="co">#browser()</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>   <span class="kw">print</span>(i)</span>
+<span id="cb6-5"><a href="#cb6-5"></a> }</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+</div>
+<div id="special-looping-functions" class="section level1 tabset tabset-pills">
+<h1>Special looping functions</h1>
+<p>Widely used functions: apply, lapply, sapply, tapply</p>
+<div id="apply" class="section level2">
+<h2><code>apply()</code></h2>
+<p>works on 2D objects (data.frame, matrix)</p>
+<p>iterates around rows or columns</p>
+<p>returns vectors</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>dt &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">mes1=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">mes2=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>), <span class="dt">mes3=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>))</span>
+<span id="cb8-2"><a href="#cb8-2"></a>rowmean &lt;-<span class="st"> </span><span class="kw">apply</span>(dt, <span class="dv">1</span>, mean)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>rowmean</span></code></pre></div>
+<pre><code>## [1] 2.333333 3.000000 3.666667</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>colmean &lt;-<span class="st"> </span><span class="kw">apply</span>(dt, <span class="dv">2</span>, mean)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>colmean</span></code></pre></div>
+<pre><code>## mes1 mes2 mes3 
+##    3    2    4</code></pre>
+</div>
+<div id="lapply" class="section level2">
+<h2><code>lapply()</code></h2>
+<p>Works on lists</p>
+<p>Iterates around list elements</p>
+<p>Returns a list</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>lt &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>), <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">52</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">lapply</span>(lt, length)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 3
+## 
+## [[2]]
+## [1] 5
+## 
+## [[3]]
+## [1] 5</code></pre>
+</div>
+<div id="tapply" class="section level2">
+<h2><code>tapply()</code></h2>
+<p>Works on subsettable objects (e.g. vector)</p>
+<p>Subsets them by the index and applies a function</p>
+<p>Returns a list</p>
+<p>One can use <code>aggregate()</code> instead</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">tapply</span>(iris<span class="op">$</span>Sepal.Width, iris<span class="op">$</span>Species, median)</span></code></pre></div>
+<pre><code>##     setosa versicolor  virginica 
+##        3.4        2.8        3.0</code></pre>
+</div>
+<div id="sapply-vapply" class="section level2">
+<h2><code>sapply()</code>, <code>vapply()</code></h2>
+<p>Similar to lapply</p>
+<p>Returns a lists, matrices, vectors or arrays.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>i39 &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">9</span>, seq) <span class="co"># list of vectors</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">sapply</span>(i39, fivenum)</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]  1.0  1.0    1  1.0  1.0  1.0    1
+## [2,]  1.5  1.5    2  2.0  2.5  2.5    3
+## [3,]  2.0  2.5    3  3.5  4.0  4.5    5
+## [4,]  2.5  3.5    4  5.0  5.5  6.5    7
+## [5,]  3.0  4.0    5  6.0  7.0  8.0    9</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">vapply</span>(i39, fivenum,</span>
+<span id="cb18-2"><a href="#cb18-2"></a>       <span class="kw">c</span>(<span class="dt">Min. =</span> <span class="dv">0</span>, <span class="st">&quot;1st Qu.&quot;</span> =<span class="st"> </span><span class="dv">0</span>, <span class="dt">Median =</span> <span class="dv">0</span>, <span class="st">&quot;3rd Qu.&quot;</span> =<span class="st"> </span><span class="dv">0</span>, <span class="dt">Max. =</span> <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>##         [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## Min.     1.0  1.0    1  1.0  1.0  1.0    1
+## 1st Qu.  1.5  1.5    2  2.0  2.5  2.5    3
+## Median   2.0  2.5    3  3.5  4.0  4.5    5
+## 3rd Qu.  2.5  3.5    4  5.0  5.5  6.5    7
+## Max.     3.0  4.0    5  6.0  7.0  8.0    9</code></pre>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

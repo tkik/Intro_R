@@ -1,0 +1,124 @@
+Functions 
+========================================================
+author: Reka Toth 
+date: `r format(Sys.time(), "%d %B, %Y")`
+autosize: true
+
+Funtions in R
+========================================================
+
+General syntax 
+
+```{r}
+f <- function(){
+  cat("Hello world! \n")
+}
+f()
+```
+
+- name: if we want to actually run th efunction
+- arguments (optional)
+- expressions
+- return value (options)
+
+```{r}
+f <- function(num1, num2){
+  res <- num1+num2
+  res
+}
+f(1,2)
+```
+
+Return value
+========================================================
+- Returns the last evaluated function
+
+- Explicitly stated. In this case, the evaluation of the function stops and exits. 
+
+```{r}
+f <- function(num1, num2){
+  res <- num1+num2
+  return(res)
+  cat("Hello world! \n")
+}
+f(1,2)
+```
+
+Arguments
+========================================================
+- Named arguments
+- Evaluation can be position or name-wise, or even with their combination. 
+
+```{r}
+
+f <- function(num1, num2){
+  print(num1)
+  print(num2)
+}
+f(1,2)
+f(num2=2, num1=1)
+f(2, num1=1)
+try(f(2))
+```
+
+Arguments
+========================================================
+- the arguments can have default values:
+
+```{r}
+
+f <- function(num1, num2=3){
+  print(num1)
+  #browser()
+  print(num2)
+}
+f(1,2)
+f(num2=2, num1=1)
+f(2)
+
+```
+
+Environment
+========================================================
+
+*Lexical scoping* - searches the environment where the function was defined. 
+
+
+```{r}
+g <- function(x) { 
+         x*y
+}
+try(g(2))
+y <- 10
+g(2)
+
+#but!
+x <- 1:10
+try(mean())
+
+```
+
+Environment
+========================================================
+Why?
+
+```{r}
+
+ls(environment(g))
+
+#ls(environment(mean))
+
+search()
+```
+
+
+
+Troubleshooting
+========================================================
+
+Useful functions:
+
+`browser()`
+`debug()`
+`options(error=recover)`
+options(error=stop)
