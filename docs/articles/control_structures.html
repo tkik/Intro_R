@@ -165,61 +165,13 @@ element.</li>
 last.</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="while">While<a class="anchor" aria-label="anchor" href="#while"></a>
-</h3>
-<p>While statements will repeat a task until a condition is met. Can
-easily be infinite, so be careful.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># count &lt;- 0</span></span>
-<span><span class="co"># while(count &lt; 10) {</span></span>
-<span><span class="co">#         print(count)</span></span>
-<span><span class="co">#         count &lt;- count + 1</span></span>
-<span><span class="co"># }</span></span>
-<span></span>
-<span><span class="co">##DO NOT RUN##</span></span>
-<span></span>
-<span><span class="co"># count &lt;- 0</span></span>
-<span><span class="co"># while(count &lt; 10) {</span></span>
-<span><span class="co">#         print(count)</span></span>
-<span><span class="co">#         count &lt;- count - 1</span></span>
-<span><span class="co"># }</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="repeat">Repeat<a class="anchor" aria-label="anchor" href="#repeat"></a>
-</h3>
-<p><code>Repeat</code> will repeat the expression in an infinite loop.
-To stop, the <code><a href="https://rdrr.io/r/base/Control.html" class="external-link">break</a></code> command has to be used. Can be
-dangerous.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#count &lt;- 1</span></span>
-<span><span class="co"># repeat {</span></span>
-<span><span class="co">#         count &lt;- count + 1</span></span>
-<span><span class="co"># if (count &gt;10)</span></span>
-<span><span class="co">#break</span></span>
-<span><span class="co"># }</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="break-and-next">break and next<a class="anchor" aria-label="anchor" href="#break-and-next"></a>
-</h3>
-<p>As seen above, <code><a href="https://rdrr.io/r/base/Control.html" class="external-link">break</a></code> breaks the whole loop and
-exits.</p>
-<p><code><a href="https://rdrr.io/r/base/Control.html" class="external-link">next</a></code> only breaks the current iteration and the loop
-continues.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># for (i in 1:10) {</span></span>
-<span><span class="co"># if (i==5)</span></span>
-<span><span class="co"># next</span></span>
-<span><span class="co"># print(i)</span></span>
-<span><span class="co"># }</span></span></code></pre></div>
-</div>
 </div>
 <div class="section level2">
 <h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
 </h2>
 <p><a href="https://docs.google.com/presentation/d/1nSdvByo3jtu47sXF6lybmoGbPxh5xLp8o9aeRC-Bh20/edit" class="external-link"><strong>Bingo!</strong></a></p>
 <p>Useful functions: print(), browser()</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
 <span>   <span class="va">a</span> <span class="op">&lt;-</span> <span class="va">i</span><span class="op">*</span><span class="fl">2</span></span>
 <span>  <span class="co">#browser()</span></span>
@@ -247,12 +199,12 @@ continues.</p>
 <p>works on 2D objects (data.frame, matrix)</p>
 <p>iterates around rows or columns</p>
 <p>returns vectors</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>mes1<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, mes2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, mes3<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rowmean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">dt</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span></span>
 <span><span class="va">rowmean</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 2.333333 3.000000 3.666667</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colmean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">dt</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></span>
 <span><span class="va">colmean</span></span></code></pre></div>
 <pre><code><span><span class="co">## mes1 mes2 mes3 </span></span>
@@ -265,7 +217,7 @@ continues.</p>
 <p>Works on lists</p>
 <p>Iterates around list elements</p>
 <p>Returns a list</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">52</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">lt</span>, <span class="va">length</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
@@ -285,7 +237,7 @@ continues.</p>
 <p>Subsets them by the index and applies a function</p>
 <p>Returns a list</p>
 <p>One can use <code><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate()</a></code> instead</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html" class="external-link">tapply</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, <span class="va">median</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##     setosa versicolor  virginica </span></span>
@@ -297,7 +249,7 @@ continues.</p>
 </h3>
 <p>Similar to lapply</p>
 <p>Returns a lists, matrices, vectors or arrays.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">i39</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">9</span>, <span class="va">seq</span><span class="op">)</span> <span class="co"># list of vectors</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">i39</span>, <span class="va">fivenum</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]</span></span>
@@ -306,7 +258,7 @@ continues.</p>
 <span><span class="co">## [3,]  2.0  2.5    3  3.5  4.0  4.5    5</span></span>
 <span><span class="co">## [4,]  2.5  3.5    4  5.0  5.5  6.5    7</span></span>
 <span><span class="co">## [5,]  3.0  4.0    5  6.0  7.0  8.0    9</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span><span class="va">i39</span>, <span class="va">fivenum</span>,</span>
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Min. <span class="op">=</span> <span class="fl">0</span>, <span class="st">"1st Qu."</span> <span class="op">=</span> <span class="fl">0</span>, Median <span class="op">=</span> <span class="fl">0</span>, <span class="st">"3rd Qu."</span> <span class="op">=</span> <span class="fl">0</span>, Max. <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##         [,1] [,2] [,3] [,4] [,5] [,6] [,7]</span></span>

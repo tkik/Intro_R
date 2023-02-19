@@ -51,7 +51,6 @@ Orange$cc <- ifelse(Orange$circumference<=65.5, "small",
 3. load esoph dataset. 
 4. Using for loop(s), summarize ncontrols by agegp and alcgp, skipping the category alcgp=="120+" & agegp=="25-34".
 5. Using a for loop simulate the flip a coin twenty times, keeping track of the individual outcomes (1 = heads, 0 = tails) in a vector that you preallocte.
-6. Use a while loop to investigate the number of terms required before the product 1*2*3*4*... reaches above 10 million
 7. Use a nested for loop (a for loop inside a for loop) that produces the following matrix, preallocate the matrix with NA values.
 
 ```{r}

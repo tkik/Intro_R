@@ -19,49 +19,25 @@ knitr::opts_chunk$set(
 The general structure of the course planned as:
 
 
-## Day 1 (Day 2? )
+## Day 1 
 
 * Basic R introduction
     + Data types
-    + Control structures
-    + Functions
-    + Debugging
 
 
 ## Day 2
 
-* Data Import
+* Control structures
+* Data import
+
+## Day 3 
+
 * Data Wrangling 
     + Tidying 
     + Cleaning
     + Summarizing
-* Exploration 
+* Exploration
     + Visualization
-    + Descriptive Statistics
-
-
-## Day 3 
-
-* Inference 
-  + Statistical modeling	
-  + Interpretation
-  
-  
-## Day 4
-
-* Work with S4 objects 
-    + GRanges 
-    + SummarizedExperiment
-    + example data analysis (Gene expression)
-    
-    
-## Day 5 
-
-* Reproducible research
-  + version control, git
-  + RMarkdown
-  + workflowr
-* Good programming practice  
 
 
 
