@@ -1,0 +1,70 @@
+---
+title: "Data import - export"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data inport - export}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Import
+
+## Data import from text files
+
+The `read.table` family is the basic function. The different versions are different in their default settings. We can define them explicitly. 
+
+```{r}
+
+background <- read.delim("../inst/extdata/background.txt", header=FALSE)
+
+head(background)
+
+#View(background)
+
+
+```
+
+
+## Excel files 
+
+
+`readxl` package - to read in data from excel 
+
+```{r}
+
+
+library(readxl)
+murders <- read_excel("../inst/extdata/murders.xlsx")
+View(murders)
+
+as.data.frame(murders)
+
+```
+
+
+# Export
+
+## `write.table` family
+
+```{r}
+
+write.csv(murders, "../inst/extdata/murders.csv")
+
+
+```
+
+## R objects
+
+```{r}
+
+#save(list = c("murders", "bakground"), file = "")
+#saveRDS(murders, file="")
+```
+
+

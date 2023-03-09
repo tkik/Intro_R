@@ -3,8 +3,10 @@ title: "R Data types"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{R Data types}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -201,7 +203,7 @@ all.equal(x1, x2)
 
 #concatenate characters
 
-paste(char1, char2)
+paste(char1, char2, char1)
 paste(char1, char2, sep="_")
 paste0(char1, char2)
 
@@ -256,10 +258,8 @@ a <- c(TRUE, TRUE, FALSE)
 b <- c(TRUE, TRUE, TRUE)
 
 a & b
-a && b
 
 a | b
-a || b
 
 # subsetting vectors 
 # Indexing is 1-based
@@ -294,7 +294,7 @@ median(a)
 sd(a)
 
 mean(b)
-mean(b, na.rm = T)
+mean(b, na.rm = TRUE)
 
 
 
@@ -320,7 +320,8 @@ a[2] <- "e"
 a <- factor(c("1", "2", "3"), levels = c("1", "2", "3", "4"))
 b <- factor(c("1", "4", "3"), levels = c("1", "4", "3", "2"))
 
-as.numeric(b)==as.numeric(a)
+as.numeric(as.character(b))==as.numeric(as.character(a))
+                                         
 
 a==b
 
@@ -373,6 +374,7 @@ b <- list(numbers=c(1:4),letters=c("two", "three"))
 #referring to an element/subsetting
 
 a[[1]]
+b[[1]]
 a[[1]][[1]]
 a[[1]][[1]][1]
 

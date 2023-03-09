@@ -28,6 +28,25 @@ vignette: >
 16. Is there any element of vector two that is larger than the the largest element of vector 1?
 
 ```{r}
+a <- c(1,1,3,4,5)
+b <- c(2, 2, 5, 4, 1)
+
+min(a)
+min(b)
+
+min(a,b)
+min(intersect(a,b))
+
+a+b
+sum(a,b)
+
+sqrt(a+b)
+
+sort(a, decreasing = TRUE)
+order(a, decreasing = TRUE)
+
+duplicated(a)
+unique(a)
 
 
 
@@ -36,13 +55,23 @@ vignette: >
 ## Exercises with data frames
 
 1. load the iris dataset (data)
-2. exctract the Petal.Lenght column as a vector. Do it by column name and column index as well. 
+2. extract the Petal.Length column as a vector. Do it by column name and column index as well. 
 3. create a data frame with the columns Sepal.Width, Sepal.Length and Species colums. 
 4. Get the maximum Petal.With for the Species setosa. 
 5. Get the second element of the Sepal.Width column
 5. How many setosa are there with the Petal.Width of 0.2
 
 ```{r}
+data("iris")
+iris$Petal.Length
+iris[,"Petal.Length"]
+iris[,3]
+
+iris2 <- iris[,c("Sepal.Width", "Sepal.Length", "Species")]
+
+
+
+
 
 ```
 
@@ -70,12 +99,14 @@ dataset
 ## Exercises with factors
 
 1. check if there are any factors in dataset. 
-2. Turn the sample type column into factors. 
+2. Turn the Treatment column into factors. 
 3. Add an "unknown" level
 4. Order the levels, so the first is "tumor".
 5. Order them according the the mean of value in decreasing order. 
 
 ```{r}
+summary(dataset)
+dataset$Treatment <- as.factor(dataset$Treatment)
 
 ```
 

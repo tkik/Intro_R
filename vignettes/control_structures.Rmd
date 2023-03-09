@@ -21,9 +21,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 2. for cycles
 
-3. while 
+3. while - won't talk about  
 
-4. Repeat
+4. Repeat - won't talk about
 
 
 
@@ -138,24 +138,4 @@ lapply(lt, length)
 data(iris)
 tapply(iris$Sepal.Width, iris$Species, median)
 ```
-
-
-## `sapply()`, `vapply()`
-
-
-  Similar to lapply
-  
-  Returns a lists, matrices, vectors or arrays. 
-
-
-```{r}
-
-i39 <- sapply(3:9, seq) # list of vectors
-sapply(i39, fivenum)
-vapply(i39, fivenum,
-       c(Min. = 0, "1st Qu." = 0, Median = 0, "3rd Qu." = 0, Max. = 0))
-
-```
-
-
 

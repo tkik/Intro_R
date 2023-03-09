@@ -38,6 +38,7 @@ The general structure of the course planned as:
     + Summarizing
 * Exploration
     + Visualization
+* AI 
 
 
 
