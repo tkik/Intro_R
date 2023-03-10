@@ -71,10 +71,16 @@
       <a href="../articles/exercises_control_solutions.html">Control structures, solutions</a>
     </li>
     <li>
+      <a href="../articles/import.html">Data import - export</a>
+    </li>
+    <li>
       <a href="../articles/intro.html">Course introduction</a>
     </li>
     <li>
       <a href="../articles/references.html">References</a>
+    </li>
+    <li>
+      <a href="../articles/regular_expressions.html">Regular expressions</a>
     </li>
     <li>
       <a href="../articles/resources.html">Resources</a>
@@ -125,7 +131,7 @@
 <li>Write an if else statement that classifies trees based on their
 circumference: &lt;= 65.5 – small &gt;65.5 &amp; &lt;= 161.5 – medium
 &gt;161.5 large</li>
-<li>Do the same with ifelse() in one step.</li>
+<li>Do the same with ifelse()</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Orange"</span><span class="op">)</span></span>
@@ -171,13 +177,12 @@ circumference: &lt;= 65.5 – small &gt;65.5 &amp; &lt;= 161.5 – medium
 <li>for each tree (1 to 5), print the ages.</li>
 <li>for each tree, print the age, in which they were small.</li>
 <li>load esoph dataset.</li>
-<li>Using for loop(s), summarize ncontrols by agegp and alcgp, skipping
-the category alcgp==“120+” &amp; agegp==“25-34”.</li>
+<li>Using for loop(s), table ncontrols by agegp and alcgp, skipping the
+category alcgp==“120+” &amp; agegp==“25-34”, using an if else
+statement.</li>
 <li>Using a for loop simulate the flip a coin twenty times, keeping
 track of the individual outcomes (1 = heads, 0 = tails) in a vector that
-you preallocte.</li>
-<li>Use a nested for loop (a for loop inside a for loop) that produces
-the following matrix, preallocate the matrix with NA values.</li>
+you predefine.</li>
 </ol>
 </div>
 <div class="section level2">
@@ -190,12 +195,22 @@ the following matrix, preallocate the matrix with NA values.</li>
 <code class="sourceCode R"><span><span class="va">dataset1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>observationA <span class="op">=</span> <span class="fl">16</span><span class="op">:</span><span class="fl">8</span>, observationB <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Calculate row and column means with apply</p></li>
-<li><p>Use apply to multiply the whole table by 3.</p></li>
+<li><p>Use apply to find the min and the max of each row and
+column.</p></li>
+<li><p>Do the same, but use a for cylce.</p></li>
 <li><p>create a list with 3 list elements. Print the length of each
 element.</p></li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">7</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Multiply each list by 2, find each list’s minimum and maximum
+value.</p></li>
+<li><p>Do the same, but use a for cycle on the list.</p></li>
+<li><p>add names to each listelements. The names should be big, if the
+element is larger than the medium of the list and small otherwise. The
+medium should be medium.</p></li>
+</ol>
 </div>
   </div>
 
@@ -216,7 +231,7 @@ element.</p></li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

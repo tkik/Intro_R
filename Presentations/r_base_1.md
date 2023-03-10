@@ -1,7 +1,7 @@
 Introduction to R
 ========================================================
 author: Reka Toth
-date: 13 March, 2022
+date: 20 February, 2023
 autosize: true
 
 Short intoduction

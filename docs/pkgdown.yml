@@ -1,5 +1,5 @@
 pandoc: '2.18'
-pkgdown: 2.0.6
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   basic_functions: basic_functions.html
@@ -9,11 +9,13 @@ articles:
   data_types_exercises_solutions: data_types_exercises_solutions.html
   exercises_control_exercises: exercises_control_exercises.html
   exercises_control_solutions: exercises_control_solutions.html
+  import: import.html
   intro: intro.html
   references: references.html
+  regular_expressions: regular_expressions.html
   resources: resources.html
   R_data_types: R_data_types.html
-last_built: 2023-02-19T23:37Z
+last_built: 2023-03-10T08:04Z
 urls:
   reference: https://CompEpigen.github.io/BasicR/reference
   article: https://CompEpigen.github.io/BasicR/articles

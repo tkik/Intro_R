@@ -1,0 +1,102 @@
+---
+title: "Regular expressions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{REgular expressions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Regular expressions
+
+Regular expressions are a concise and flexible tool for describing patterns in strings. This vignette describes the key features of stringr’s regular expressions, as implemented by stringi. It is not a tutorial, so if you’re unfamiliar regular expressions, I’d recommend starting at https://r4ds.had.co.nz/strings.html. If you want to master the details, I’d recommend reading the classic Mastering Regular Expressions by Jeffrey E. F. Friedl.
+
+Regular expressions are the default pattern engine in stringr. That means when you use a pattern matching function with a bare string, it’s equivalent to wrapping it in a call to regex():
+
+## Basic matches
+
+The simplest patterns match exact strings:
+
+```{r}
+x <- c("apple", "banana", "pear", "tapas")
+grep( "an", x)
+```
+```{r}
+
+grep("a.a", x)
+grep("a\\.a", x)
+```
+You can also create your own __character classes__ using `[]`:
+
+* `[abc]`: matches a, b, or c.
+* `[a-z]`: matches every character between a and z 
+   (in Unicode code point order).
+* `[^abc]`: matches anything except a, b, or c.
+* `[\^\-]`: matches `^` or `-`.
+
+There are a number of pre-built classes that you can use inside `[]`:
+
+* `[:punct:]`: punctuation.
+* `[:alpha:]`: letters.
+* `[:lower:]`: lowercase letters.
+* `[:upper:]`: upperclass letters.
+* `[:digit:]`: digits.
+* `[:xdigit:]`: hex digits.
+* `[:alnum:]`: letters and numbers.
+* `[:cntrl:]`: control characters.
+* `[:graph:]`: letters, numbers, and punctuation.
+* `[:print:]`: letters, numbers, punctuation, and whitespace.
+* `[:space:]`: space characters (basically equivalent to `\s`).
+* `[:blank:]`: space and tab.
+
+
+## Alternation
+
+`|` is the __alternation__ operator, which will pick between one or more possible matches. For example, `abc|def` will match `abc` or `def`:
+
+
+```{r}
+grep( "abc|def", c("abc", "def", "ghi"))
+```
+
+
+
+* `^` now matches the start of each line. 
+
+* `$` now matches the end of each line.
+
+* `\A` matches the start of the input.
+
+* `\z` matches the end of the input.
+
+* `\Z` matches the end of the input, but before the final line terminator, 
+  if it exists.
+  
+## Repetition
+
+You can control how many times a pattern matches with the repetition operators:
+
+* `?`: 0 or 1.
+* `+`: 1 or more.
+* `*`: 0 or more.
+
+
+* `{n}`: exactly n
+* `{n,}`: n or more
+* `{n,m}`: between n and m
+
+## `grep`, `grepl`, `gsub`
+
+
+```{r}
+gsub("ap", "b", x)
+```
+

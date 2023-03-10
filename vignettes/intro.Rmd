@@ -29,6 +29,7 @@ The general structure of the course planned as:
 
 * Control structures
 * Data import
+* regular expressions
 
 ## Day 3 
 

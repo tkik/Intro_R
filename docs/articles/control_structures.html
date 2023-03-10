@@ -71,10 +71,16 @@
       <a href="../articles/exercises_control_solutions.html">Control structures, solutions</a>
     </li>
     <li>
+      <a href="../articles/import.html">Data import - export</a>
+    </li>
+    <li>
       <a href="../articles/intro.html">Course introduction</a>
     </li>
     <li>
       <a href="../articles/references.html">References</a>
+    </li>
+    <li>
+      <a href="../articles/regular_expressions.html">Regular expressions</a>
     </li>
     <li>
       <a href="../articles/resources.html">Resources</a>
@@ -121,8 +127,8 @@
 <ol style="list-style-type: decimal">
 <li><p>If-else statement</p></li>
 <li><p>for cycles</p></li>
-<li><p>while</p></li>
-<li><p>Repeat</p></li>
+<li><p>while - won’t talk about</p></li>
+<li><p>Repeat - won’t talk about</p></li>
 </ol>
 <div class="section level3">
 <h3 id="if-else-statement">If-else statement<a class="anchor" aria-label="anchor" href="#if-else-statement"></a>
@@ -243,31 +249,6 @@ last.</li>
 <pre><code><span><span class="co">##     setosa versicolor  virginica </span></span>
 <span><span class="co">##        3.4        2.8        3.0</span></span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="sapply-vapply">
-<code>sapply()</code>, <code>vapply()</code><a class="anchor" aria-label="anchor" href="#sapply-vapply"></a>
-</h3>
-<p>Similar to lapply</p>
-<p>Returns a lists, matrices, vectors or arrays.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">i39</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">9</span>, <span class="va">seq</span><span class="op">)</span> <span class="co"># list of vectors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">i39</span>, <span class="va">fivenum</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]</span></span>
-<span><span class="co">## [1,]  1.0  1.0    1  1.0  1.0  1.0    1</span></span>
-<span><span class="co">## [2,]  1.5  1.5    2  2.0  2.5  2.5    3</span></span>
-<span><span class="co">## [3,]  2.0  2.5    3  3.5  4.0  4.5    5</span></span>
-<span><span class="co">## [4,]  2.5  3.5    4  5.0  5.5  6.5    7</span></span>
-<span><span class="co">## [5,]  3.0  4.0    5  6.0  7.0  8.0    9</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span><span class="va">i39</span>, <span class="va">fivenum</span>,</span>
-<span>       <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Min. <span class="op">=</span> <span class="fl">0</span>, <span class="st">"1st Qu."</span> <span class="op">=</span> <span class="fl">0</span>, Median <span class="op">=</span> <span class="fl">0</span>, <span class="st">"3rd Qu."</span> <span class="op">=</span> <span class="fl">0</span>, Max. <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##         [,1] [,2] [,3] [,4] [,5] [,6] [,7]</span></span>
-<span><span class="co">## Min.     1.0  1.0    1  1.0  1.0  1.0    1</span></span>
-<span><span class="co">## 1st Qu.  1.5  1.5    2  2.0  2.5  2.5    3</span></span>
-<span><span class="co">## Median   2.0  2.5    3  3.5  4.0  4.5    5</span></span>
-<span><span class="co">## 3rd Qu.  2.5  3.5    4  5.0  5.5  6.5    7</span></span>
-<span><span class="co">## Max.     3.0  4.0    5  6.0  7.0  8.0    9</span></span></code></pre>
-</div>
 </div>
   </div>
 
@@ -288,7 +269,7 @@ last.</li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
