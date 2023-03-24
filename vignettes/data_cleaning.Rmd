@@ -1,10 +1,10 @@
 ---
-title: "Data cleaning with Tidyverse"
+title: "Data cleaning"
 author: "Reka Toth"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data cleaning with Tidyverse}
+  %\VignetteIndexEntry{Data cleaning}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -32,7 +32,7 @@ messy_data.xlsx
 messy_data.txt
 
 
-
-
-
 Also a quote using `>`:
+
+
+

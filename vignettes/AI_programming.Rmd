@@ -1,0 +1,27 @@
+---
+title: "AI assisted programming"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{AI assisted programming}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+Useful tools: 
+
+[RTutor](http://rtutor.ai/)
+[ChatGPT](https://chat.openai.com/)
+[Co-pilot](https://github.com/features/copilot)
+
+
+RStudio addins
+[gptstudio](https://github.com/MichelNivard/GPTstudio)
+[gpttools](https://github.com/JamesHWade/gpttools)
+
+
+
+
+Keep in mind:
+- Don't upload any protected data! - if you want to try, create some example data
+- Always double check if it 

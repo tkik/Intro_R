@@ -2,6 +2,7 @@ pandoc: '2.18'
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  AI_programming: AI_programming.html
   basic_functions: basic_functions.html
   control_structures: control_structures.html
   data_cleaning: data_cleaning.html
@@ -13,9 +14,10 @@ articles:
   intro: intro.html
   references: references.html
   regular_expressions: regular_expressions.html
+  reproducible: reproducible.html
   resources: resources.html
   R_data_types: R_data_types.html
-last_built: 2023-03-10T08:04Z
+last_built: 2023-03-24T00:09Z
 urls:
   reference: https://CompEpigen.github.io/BasicR/reference
   article: https://CompEpigen.github.io/BasicR/articles

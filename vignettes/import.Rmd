@@ -2,7 +2,7 @@
 title: "Data import - export"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data inport - export}
+  %\VignetteIndexEntry{Data import - export}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

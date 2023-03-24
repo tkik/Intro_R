@@ -10,7 +10,7 @@ vignette: >
 ## If-else statement
 
 1. load in the Orange dataset
-2. Create a new, empty variable
+2. Create a new, empty column
 3. Write a for loop to iterate over the rows of the dataset
 3. Write an if else statement that classifies trees based on their circumference: 
     <= 65.5 -- small

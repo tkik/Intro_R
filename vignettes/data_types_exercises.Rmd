@@ -59,7 +59,7 @@ unique(a)
 3. create a data frame with the columns Sepal.Width, Sepal.Length and Species colums. 
 4. Get the maximum Petal.With for the Species setosa. 
 5. Get the second element of the Sepal.Width column
-5. How many setosa are there with the Petal.Width of 0.2
+6. How many setosa are there with the Petal.Width of 0.2
 
 ```{r}
 data("iris")
@@ -92,7 +92,11 @@ dataset
 6. change all "E"s back to "A"s, if they appear second. Do it as generalized as possible.
 
 ```{r}
+grepl("normal", dataset$Patient.ID)
 
+dataset$Sample_Type <-  ifelse(grepl("normal", dataset$Patient.ID), "normal", "tumor")
+
+rownames(dataset) <-  gsub("Sample", "Sample_", rownames(dataset))
 
 ```
 
