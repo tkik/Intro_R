@@ -1,0 +1,50 @@
+---
+title: "Assignment"
+output: html_document
+date: "2023-03-31"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+## Introduction
+
+Please solve the tasks in the R chunks below. when you are ready, please click the **Knit** button. A document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Please leave the rest of the document unchanged, however, feel free to play with the styles. 
+[Rmarkdown styles](https://bookdown.org/yihui/rmarkdown/appearance-and-style-1.html)
+
+All the codes need to run without an error, then an html file will be created that you can share with me.
+
+```{r data_open}
+# We are using the esoph data
+data(esoph)
+```
+
+## Assignemtns
+
+1. Using the esoph data, please print the first 10 lines. 
+2. use the table function to see the data in the agegp variable. 
+3. print all ncontrols, whwere the agegp is 25-34.
+5. Calculate the mean of the ncontrols variable. 
+6. Calculate the means of ncontrols in each tobgp 
+7. Create a new variable, that takes the calue "consumer", if both the tobgp and the alcgp are more than the first category (>37 and >9g/day) and "non-consumer" otherwise
+8. what is the maximum and the minimum of ncontols?
+
+
+```{r solutions, echo=FALSE}
+
+
+
+
+```
+
+
+
+
+
+```{r, echo = FALSE, out.width = "70%", eval=TRUE}
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/code_hero.jpg", dpi = 100)
+```

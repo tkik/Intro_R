@@ -11,7 +11,7 @@ vignette: >
 
 1. load in the Orange dataset
 2. Create a new, empty column
-3. Write a for loop to iterate over the rows of the dataset
+3. Write a for loop to iterate over the rows of the dataset and print the circumference
 3. Write an if else statement that classifies trees based on their circumference: 
     <= 65.5 -- small
     >65.5 & <= 161.5 -- medium
@@ -23,10 +23,21 @@ data("Orange")
 
 Hmisc::describe(Orange)
 
+
+for (i in 1:nrow(Orange)) {
+  if (Orange[i, "circumference"]<= 65.5){
+    Orange[i, "size"] <- "small"} else if (Orange[i, "circumference"]>161.5) {
+       Orange[i, "size"] <- "large"
+      
+    } else {    Orange[i, "size"] <- "medium"}
+}
+
+Orange$size <- ifelse(Orange$circumference<=65.5, "small", ifelse(Orange$circumference>161.5, "large", "medium"))
+
 ```
 
 
-## For, while loop
+## For  loop
 
 1. for each tree (1 to 5), print the ages. 
 2. for each tree, print the age, in which they were small. 
@@ -55,8 +66,6 @@ dataset1 <- cbind(observationA = 16:8, observationB = c(20:19, 6:12))
 4. Do the same, but use a for cylce. 
 
 ```{r}
-
-
 
 ```
 

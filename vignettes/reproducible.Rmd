@@ -49,7 +49,9 @@ vignette: >
 Show code and output
 
 ```{r}
+
 plot(cars)
+
 ```
 
 Show only output

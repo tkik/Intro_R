@@ -10,6 +10,18 @@ editor_options:
 ---
 
 
+Variable names in R
+========================================================
+
+Variable naming conventions:
+
+- do not overwrite keywords! Don't name your variable e.g. TRUE, vector, list, etc. Use the free names.
+- variable names are case sensitive
+- use ".",  "_" or uppercase letters as a separator. Try to be consistent in your codes.
+- create meaningful, but not too long names!
+
+R is non-declarative. It means we don't have to declare the type of variables before creating them. \n It also means that the class (type) of the variables will be assigned automatically!
+
 # Primitive types
 
 ## Numeric and integer
@@ -19,7 +31,7 @@ editor_options:
 x <- 1
 y <- 2L
 
-cat("R is non-declarative. It means we don't have to declare the type of variables before creating them. \n It also means that the class (type) of the variables will be assigned automatically!")
+
 
 
 class(x)

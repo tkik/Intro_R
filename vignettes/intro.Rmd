@@ -23,13 +23,14 @@ The general structure of the course planned as:
 
 * Basic R introduction
     + Data types
-
+* Data import
 
 ## Day 2
 
 * Control structures
-* Data import
 * regular expressions
+* Exploration
+    + Visualization
 
 ## Day 3 
 
@@ -37,8 +38,6 @@ The general structure of the course planned as:
     + Tidying 
     + Cleaning
     + Summarizing
-* Exploration
-    + Visualization
 * AI 
 
 
