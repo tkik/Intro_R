@@ -1,4 +1,4 @@
-url: https://CompEpigen.github.io/BasicR
+url: https://tkik.github.io/Intro_R
 
 template:
   params:
@@ -13,6 +13,8 @@ home:
 navbar:
   right:
    - icon: fa-github
-     href: https://github.com/CompEpigen/BasicR
+     href: https://github.com/tkik/Intro_R
 
 
+figures:
+   dev: grDevices::png

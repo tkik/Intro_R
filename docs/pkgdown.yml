@@ -1,24 +1,24 @@
-pandoc: '2.18'
+pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  1_data_types_exercises: 1_data_types_exercises.html
+  1_data_types_exercises_solutions: 1_data_types_exercises_solutions.html
+  1_import: 1_import.html
+  1_R_data_types: 1_R_data_types.html
+  2_control_structures: 2_control_structures.html
+  2_exercises_control_exercises: 2_exercises_control_exercises.html
+  2_exercises_control_solutions: 2_exercises_control_solutions.html
+  2_regular_expressions: 2_regular_expressions.html
   AI_programming: AI_programming.html
   basic_functions: basic_functions.html
-  control_structures: control_structures.html
   data_cleaning: data_cleaning.html
-  data_types_exercises: data_types_exercises.html
-  data_types_exercises_solutions: data_types_exercises_solutions.html
-  exercises_control_exercises: exercises_control_exercises.html
-  exercises_control_solutions: exercises_control_solutions.html
-  import: import.html
   intro: intro.html
   references: references.html
-  regular_expressions: regular_expressions.html
   reproducible: reproducible.html
   resources: resources.html
-  R_data_types: R_data_types.html
-last_built: 2023-03-24T00:09Z
+last_built: 2024-02-21T00:44Z
 urls:
-  reference: https://CompEpigen.github.io/BasicR/reference
-  article: https://CompEpigen.github.io/BasicR/articles
+  reference: https://tkik.github.io/Intro_R/reference
+  article: https://tkik.github.io/Intro_R/articles
 
