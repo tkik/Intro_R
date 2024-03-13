@@ -10,21 +10,37 @@ vignette: >
 ## If-else statement
 
 1. load in the Orange dataset
-2. Create a new, empty variable
-3. Write a for loop to iterate over the rows of the dataset
-3. Write an if else statement that classifies trees based on their circumference: 
+2. Write a for loop to iterate over the trees (Tree 1 to 5) of the dataset and print the circumference for each
+3. Write an if else statement that classifies a tree based on its circumference: 
     <= 65.5 -- small
     >65.5 & <= 161.5 -- medium
     >161.5 large
-4. Do the same with ifelse() in one step.
+    try with x=45, x=124 and x=179
+4. Do the same with ifelse(), using the categories
+    <=  161.5 -- small
+    >161.5 large
+5. additional: write a for cycle to iterate around the rows of the dataset and assins the category to each row. Create an empty column first to store the categories.     
 
 ```{r}
 data("Orange")
 
 Hmisc::describe(Orange)
 
+for (i in 1:5) print(Orange$circumference[Orange$Tree==i])
+
+x=45
+
+if (x <= 65.5){
+  print("small")
+} else if (x>65.5 & x<=161.5){
+  print("medium")
+} else {
+  print("large")
+}
+
+Orange$cc <- ifelse(Orange$circumference<=161.5, "small",  "large")
+
 Orange$cc <- NA
-#Orange$tree <- "something else"
 
 for (i in 1:nrow(Orange)){
   print(i)
@@ -50,8 +66,7 @@ Orange$cc <- ifelse(Orange$circumference<=65.5, "small",
 2. for each tree, print the age, in which they were small. 
 3. load esoph dataset. 
 4. Using for loop(s), summarize ncontrols by agegp and alcgp, skipping the category alcgp=="120+" & agegp=="25-34".
-5. Using a for loop simulate the flip a coin twenty times, keeping track of the individual outcomes (1 = heads, 0 = tails) in a vector that you preallocte.
-7. Use a nested for loop (a for loop inside a for loop) that produces the following matrix, preallocate the matrix with NA values.
+5. Using a for loop simulate the flip a coin twenty times, keeping track of the individual outcomes (1 = heads, 0 = tails) in a vector.
 
 ```{r}
 
@@ -90,6 +105,8 @@ for (agegrp in levels(esoph$agegp)){
   cat("Age group: ", agegrp, ", alcohol consumption group: ", alcgrp, " number of controls: ", sum(esoph$ncontrols[esoph$alcgp==alcgrp & esoph$agegp==agegrp]), "\n")}
   }
 }
+
+results <- sample(c(0,1), 20, replace = T)
 
 ```
 

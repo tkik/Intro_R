@@ -89,7 +89,7 @@ dataset
 3. add an "_" to the sample names: sample_3
 4. summarize all values that are coming from normal samples
 5. change all "A"s in the Sentrix.position column to "E"s. 
-6. change all "E"s back to "A"s, if they appear second. Do it as generalized as possible.
+6. change all "E"s back to "A"s, if they appear first. Do it as generalized as possible.
 
 ```{r}
 grepl("normal", dataset$Patient.ID)

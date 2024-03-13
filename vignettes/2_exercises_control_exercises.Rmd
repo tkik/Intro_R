@@ -10,29 +10,22 @@ vignette: >
 ## If-else statement
 
 1. load in the Orange dataset
-2. Create a new, empty column
-3. Write a for loop to iterate over the rows of the dataset and print the circumference
-3. Write an if else statement that classifies trees based on their circumference: 
+2. Write a for loop to iterate over the trees (Tree 1 to 5) of the dataset and print the circumference for each
+3. Write an if else statement that classifies a tree based on its circumference: 
     <= 65.5 -- small
     >65.5 & <= 161.5 -- medium
     >161.5 large
-4. Do the same with ifelse()
+    try with x=45, x=124 and x=179
+4. Do the same with ifelse(), using the categories
+    <=  161.5 -- small
+    >161.5 large
+5. additional: write a for cycle to iterate around the rows of the dataset and assins the category to each row. Create an empty column first to store the categories.     
 
 ```{r}
 data("Orange")
 
 Hmisc::describe(Orange)
 
-
-for (i in 1:nrow(Orange)) {
-  if (Orange[i, "circumference"]<= 65.5){
-    Orange[i, "size"] <- "small"} else if (Orange[i, "circumference"]>161.5) {
-       Orange[i, "size"] <- "large"
-      
-    } else {    Orange[i, "size"] <- "medium"}
-}
-
-Orange$size <- ifelse(Orange$circumference<=65.5, "small", ifelse(Orange$circumference>161.5, "large", "medium"))
 
 ```
 
@@ -43,7 +36,7 @@ Orange$size <- ifelse(Orange$circumference<=65.5, "small", ifelse(Orange$circumf
 2. for each tree, print the age, in which they were small. 
 3. load esoph dataset. 
 4. Using for loop(s), table ncontrols by agegp and alcgp, skipping the category alcgp=="120+" & agegp=="25-34", using an if else statement.
-5. Using a for loop simulate the flip a coin twenty times, keeping track of the individual outcomes (1 = heads, 0 = tails) in a vector that you predefine.
+5. Using a for loop simulate the flip a coin twenty times, keeping track of the individual outcomes (1 = heads, 0 = tails) in a vector that you predefine. (sample function)
 
 
 
