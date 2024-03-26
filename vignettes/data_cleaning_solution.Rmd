@@ -37,6 +37,10 @@ library(summarytools)
 view(dfSummary(messy_data))
 
 
+messy_data$Date_of_birth <- as.Date(messy_data$Date_of_birth,
+                        format = "%d/%m/%Y")
+
+
 ```
 
 

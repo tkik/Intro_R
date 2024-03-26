@@ -1,0 +1,57 @@
+---
+title: "Plotting"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plotting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+
+library(ggpubr)
+messy_data <- read.csv("P:/Teaching/Intro_R/Intro_R/inst/extdata/messy_data.csv")
+
+ggdensity(messy_data, x = "Age",
+   add = "mean", rug = TRUE,
+    fill = "Gender",
+   palette = c("#00AFBB", "#E7B800", "coral"))
+
+gghistogram(messy_data,  x = "Age",
+   add = "mean", rug = TRUE,
+    fill = "Gender",
+   palette = c("#00AFBB", "#E7B800", "coral"))
+
+ggline(
+  messy_data,
+  "Age",
+  "enzyme.level",
+  color = "black",
+  palette = NULL)
+
+ggline(
+  messy_data,
+  "Age",
+  "enzyme.level",
+  color = "black",
+  palette = NULL,
+  linetype = "Gender")
+
+
+```
+
+```{r}
+
+ p <- ggboxplot(messy_data, x = "Gender", y = "enzyme.level",
+                color = "Status", palette =c("#00AFBB", "#E7B800", "#FC4E07"),
+                add = "jitter")
+ p
+```
+

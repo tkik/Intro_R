@@ -83,6 +83,9 @@ print(xtable::xtable(mtcars), type = 'html')
 ```
 
 
+```{r}
+sessionInfo()
+```
 
 
 
