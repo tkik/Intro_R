@@ -11,6 +11,12 @@ vignette: >
 
 1. load in the Orange dataset
 2. Write a for loop to iterate over the trees (Tree 1 to 5) of the dataset and print the circumference for each
+```{r}
+
+
+
+```
+
 3. Write an if else statement that classifies a tree based on its circumference: 
     <= 65.5 -- small
     >65.5 & <= 161.5 -- medium
@@ -19,12 +25,9 @@ vignette: >
 4. Do the same with ifelse(), using the categories
     <=  161.5 -- small
     >161.5 large
-5. additional: write a for cycle to iterate around the rows of the dataset and assins the category to each row. Create an empty column first to store the categories.     
+5. additional: write a for cycle to iterate around the rows of the dataset and assigns the category to each row. Create an empty column first to store the categories.     
 
 ```{r}
-data("Orange")
-
-Hmisc::describe(Orange)
 
 
 ```
@@ -34,6 +37,11 @@ Hmisc::describe(Orange)
 
 1. for each tree (1 to 5), print the ages. 
 2. for each tree, print the age, in which they were small. 
+
+```{r}
+
+```
+
 3. load esoph dataset. 
 4. Using for loop(s), table ncontrols by agegp and alcgp, skipping the category alcgp=="120+" & agegp=="25-34", using an if else statement.
 5. Using a for loop simulate the flip a coin twenty times, keeping track of the individual outcomes (1 = heads, 0 = tails) in a vector that you predefine. (sample function)
@@ -69,8 +77,11 @@ dataset1 <- cbind(observationA = 16:8, observationB = c(20:19, 6:12))
 
 4. create a list with 3 list elements. Print the length of each element. 
 
+
 ```{r}
-lll <- list(list(1,3,5,6,1), list(5,2,1), list(6,2,5,7,3,1,9))
+
+
+
 ```
 
 
